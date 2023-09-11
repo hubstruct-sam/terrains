@@ -4,7 +4,7 @@ class Terrain
   static QUD = 1;
   static MIX = 2;
 
-  constructor(parametric, subX, subY, minX = -1, maxX = 1, minY = -1, maxY = 1)
+  constructor(parametric, subX, subY, minX = -1, minY = -1, maxX = 1, maxY = 1)
   {
     this.vs = []; // Vertices
   
@@ -81,12 +81,13 @@ class Terrain
     
     fill(255);
     stroke(0);
+    strokeWeight(lx * 0.015);
     
     for(let y = 0; y < this.vs.length - 1; y++)
     {
       for(let x = 0; x < this.vs[y].length - 1; x++)
       {
-        strokeWeight(lx * 0.015 * random());
+        // strokeWeight(lx * 0.015 * random());
 
         let a = this.vs[y    ][x    ];
         let b = this.vs[y    ][x + 1];

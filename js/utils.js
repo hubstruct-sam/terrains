@@ -1,4 +1,5 @@
-let seed, nextSeed = 4065186;
+// let seed, nextSeed = 4065186;
+let seed, nextSeed = 8309768; // DEBUG: subdivision
 let w, h;
 let refresh = true;
 
