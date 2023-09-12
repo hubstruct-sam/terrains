@@ -4,6 +4,7 @@ let w, h;
 let refresh = true;
 
 const zeroPad = (num, places) => String(num).padStart(places, '0');
+const evenify = (num) => num + (num % 2 === 1);
 
 function keyPressed()
 {

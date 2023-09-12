@@ -7,19 +7,14 @@ class Land
     this.subdivide(k, [-1, -1], [1, 1], subX, subY);
   }
 
-  subdivide(k, ss, es, subX, subY, half = 0)
-  {    
-    console.log('////////////////// k = ' + k)
-    console.log('ss = ' + ss)
-    console.log('es = ' + es)
-    console.log('half = ' + half)
-
+  subdivide(k, ss, es, subX, subY, half = 1)
+  {
     if(k == 0)
     {
       this.terrains.push(new Terrain(
         this.fn, 
-        round(random(0, subX)), 
-        round(random(0, subY)), 
+        evenify(round(random(2, subX))), 
+        evenify(round(random(2, subY))), 
         ss[0], 
         ss[1], 
         es[0],
@@ -28,7 +23,7 @@ class Land
     }
     else
     {
-      let t = random(0.15, 0.85);
+      let t = random(0.35, 0.65);
 
       if(half == 0)
       {
@@ -55,7 +50,7 @@ class Land
         mode, // drawing mode
         w * 0.25, // length along X
         h * 0.25, // length along Y
-        0, // length along Z
+        w * 0.05, // length along Z
         0, // amplitude for X-noise
         0, // amplitude for Y-noise
         0, // amplitude for Z-noise

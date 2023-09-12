@@ -1,9 +1,7 @@
-function parametric([x, y], amp, phase)
+function parametric([x, y])
 {
-  const u = x * 2 - 1;
-  const v = y * 2 - 1;
-  const z = amp * Math.sin(u * Math.PI * 2 + phase / (v * 0.05 + 1));
-  // const z = Math.sin((u * 2.0)**2) + Math.cos((v * 2.0)**2);
+  const z = Math.sin(x * Math.PI * 2 / (y * 0.05 + 1));
+  // const z = Math.sin((x * 2.0)**2) + Math.cos((y * 2.0)**2);
   return [x, y, z];
 }
 
@@ -28,8 +26,8 @@ function genSystem()
 {
   setSeed();
 
+  background(0, 100, 0, 255);
   isoCam([0.5, 0.5, 0.5]);
-  background(0, 255, 0);
 
   // makeTerrain();
   makeLand();
@@ -75,9 +73,9 @@ function makeLand()
 {
   const land = new Land(
     parametric,
-    1,
-    4,
-    4
+    6,
+    8,
+    8,
   );
 
   land.draw(w, h, Terrain.QUD);

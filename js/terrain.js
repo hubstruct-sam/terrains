@@ -4,7 +4,7 @@ class Terrain
   static QUD = 1;
   static MIX = 2;
 
-  constructor(parametric, subX, subY, minX = -1, minY = -1, maxX = 1, maxY = 1)
+  constructor(parametric, subX, subY, minX = 0, minY = 0, maxX = 1, maxY = 1)
   {
     this.vs = []; // Vertices
   
@@ -15,8 +15,6 @@ class Terrain
     this.subX = subY;
 
     // Create vertices
-    const amp = random();
-    const phase = random() * 100;
     for(let y = 0; y < subY; y++)
     {
       this.vs[y] = [];
@@ -25,24 +23,13 @@ class Terrain
         this.vs[y].push(
           parametric(
             [
-              subX <= 1 ? 0.5 : x / (subX - 1), 
-              subY <= 1 ? 0.5 : y / (subY - 1),
-            ], 
-            amp,
-            phase,
+              map(subX <= 1 ? 0.5 : x / (subX - 1), 0, 1, minX, maxX), 
+              map(subY <= 1 ? 0.5 : y / (subY - 1), 0, 1, minY, maxY),
+            ]
           )
         )
       }
-    }
-
-    for(let y = 0; y < this.vs.length; y++)
-    {
-      for(let x = 0; x < this.vs[y].length; x++)
-      {
-        this.vs[y][x][0] = map(this.vs[y][x][0], 0, 1, minX, maxX);
-        this.vs[y][x][1] = map(this.vs[y][x][1], 0, 1, minY, maxY);
-      } 
-    }
+    }    
   }
 
   setVertex(v, lx, ly, lz, ax, ay, az)
@@ -81,7 +68,7 @@ class Terrain
     
     fill(255);
     stroke(0);
-    strokeWeight(lx * 0.015);
+    strokeWeight(lx * 0.005);
     
     for(let y = 0; y < this.vs.length - 1; y++)
     {
