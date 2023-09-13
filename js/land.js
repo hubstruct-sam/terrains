@@ -1,6 +1,6 @@
 class Land
 {
-  constructor(parametric, k = 4, subX, subY = subX)
+  constructor(parametric, k, subX, subY)
   {
     this.fn = parametric;
     this.terrains = [];
@@ -11,6 +11,10 @@ class Land
   {
     if(k == 0)
     {
+      // const randSubX = evenify(round(random(2, subX))); 
+      // const randSubY = evenify(round(random(2, subY))); 
+      // console.log('randSubX = ' + randSubX); 
+      // console.log('randSubY = ' + randSubY); 
       this.terrains.push(new Terrain(
         this.fn, 
         evenify(round(random(2, subX))), 
@@ -23,19 +27,17 @@ class Land
     }
     else
     {
-      let t = random(0.35, 0.65);
+      let t = random(0.25, 0.75);
 
-      if(half == 0)
+      if(half == 1)
       {
-        half = abs(half - 1);
-        this.subdivide(k - 1, [ss[0], ss[1]], [es[0] * t, es[1]], subX, subY, half);
-        this.subdivide(k - 1, [es[0] * t, ss[1]], [es[0], es[1]], subX, subY, half);
+        this.subdivide(k - 1, [ss[0], ss[1]], [es[0] * t, es[1]], subX, subY, !half);
+        this.subdivide(k - 1, [es[0] * t, ss[1]], [es[0], es[1]], subX, subY, !half);
       }
       else
       {
-        half = abs(half - 1);
-        this.subdivide(k - 1, [ss[0], ss[1]], [es[0], es[1] * t], subX, subY, half);
-        this.subdivide(k - 1, [ss[0], es[1] * t], [es[0], es[1]], subX, subY, half);
+        this.subdivide(k - 1, [ss[0], ss[1]], [es[0], es[1] * t], subX, subY, !half);
+        this.subdivide(k - 1, [ss[0], es[1] * t], [es[0], es[1]], subX, subY, !half);
       }
     }
   }
@@ -50,10 +52,10 @@ class Land
         mode, // drawing mode
         w * 0.25, // length along X
         h * 0.25, // length along Y
-        w * 0.05, // length along Z
+        w * 0.015, // length along Z
         0, // amplitude for X-noise
         0, // amplitude for Y-noise
-        0, // amplitude for Z-noise
+        1.5, // amplitude for Z-noise
       )
       pop();
     }

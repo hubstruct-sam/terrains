@@ -27,19 +27,20 @@ function genSystem()
   setSeed();
 
   background(0, 100, 0, 255);
-  isoCam([0.5, 0.5, 0.5]);
+  // translate(0, 0, 250)
+  // isoCam([0.35, 0.35, 0.35]);
 
-  // makeTerrain();
-  makeLand();
+  makeTerrain();
+  // makeLand();
 
-  axis(w, w * 0.002);
+  // axis(w, w * 0.002);
   
-  push();
-  noFill();
-  strokeWeight(w * 0.01);
-  stroke(255, 0, 0);
-  rect(-w * 0.25, -h * 0.25, w * 0.5, h * 0.5);
-  pop();
+  // push();
+  // noFill();
+  // strokeWeight(w * 0.01);
+  // stroke(255, 0, 0);
+  // rect(-w * 0.25, -h * 0.25, w * 0.5, h * 0.5);
+  // pop();
 
   refresh = !refresh;
 }
@@ -58,7 +59,7 @@ function makeTerrain()
 
   push();
   terrain.draw(
-    Terrain.MIX,
+    Terrain.QUD,
     w * 0.25, // length along X
     h * 0.25, // length along Y
     w * 0.05, // length along Z
@@ -72,10 +73,10 @@ function makeTerrain()
 function makeLand()
 {
   const land = new Land(
-    parametric,
-    6,
-    8,
-    8,
+    parametric, // parametric: function to calculate Z-coordinate
+    4, // k: number of land subdivisions
+    2, // subX: max number of terrain subdivision along X-coordinate
+    2, // subY: max number of terrain subdivision along Y-coordinate
   );
 
   land.draw(w, h, Terrain.QUD);

@@ -17,6 +17,7 @@ class Terrain
     // Create vertices
     for(let y = 0; y < subY; y++)
     {
+
       this.vs[y] = [];
       for(let x = 0; x < subX; x++)
       {
@@ -29,14 +30,14 @@ class Terrain
           )
         )
       }
-    }    
+    }
   }
 
   setVertex(v, lx, ly, lz, ax, ay, az)
   {
-    let x = v[0] + ax * map(noise(v[0], v[1], v[2]), 0, 1, -1, 1);
-    let y = v[1] + ay * map(noise(v[1], v[2], v[0]), 0, 1, -1, 1);
-    let z = v[2] + az * map(noise(v[2], v[0], v[1]), 0, 1, -1, 1);
+    let x = v[0] + ax * map(noise(v[0], v[1], v[1]), 0, 1, -1, 1);
+    let y = v[1] + ay * map(noise(v[1], v[1], v[0]), 0, 1, -1, 1);
+    let z = v[2] + az * map(noise(v[1], v[0], v[1]), 0, 1, -1, 1);
     return vertex(x * lx, y * ly, z * lz);
   }
 
@@ -68,13 +69,13 @@ class Terrain
     
     fill(255);
     stroke(0);
-    strokeWeight(lx * 0.005);
+    strokeWeight(lx * 0.0015);
     
     for(let y = 0; y < this.vs.length - 1; y++)
     {
       for(let x = 0; x < this.vs[y].length - 1; x++)
       {
-        // strokeWeight(lx * 0.015 * random());
+        strokeWeight(lx * 0.015 * random(0.1, 0.75));
 
         let a = this.vs[y    ][x    ];
         let b = this.vs[y    ][x + 1];
